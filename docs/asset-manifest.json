@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.77e8ea64.css",
+    "main.js": "/static/js/main.40546983.js",
+    "static/js/453.d81cfe64.chunk.js": "/static/js/453.d81cfe64.chunk.js",
+    "static/media/viber-svgrepo-com-2.svg": "/static/media/viber-svgrepo-com-2.095f343a4e8c94cb27c2aae325adf468.svg",
+    "static/media/phone-calling-svgrepo-com.svg": "/static/media/phone-calling-svgrepo-com.c27298ade189f54265a01dc2f0fef2bc.svg",
+    "static/media/whatsapp-svgrepo-com.svg": "/static/media/whatsapp-svgrepo-com.f2883296e5f8c40374f487bfc522416c.svg",
+    "static/media/favorite-svgrepo-com.svg": "/static/media/favorite-svgrepo-com.1306620639c063da148d1db639d22245.svg",
+    "static/media/basket-loaded-svgrepo-com.svg": "/static/media/basket-loaded-svgrepo-com.108f898770bdf56a3e8264835fd26e91.svg",
+    "static/media/telegram-svgrepo-com.svg": "/static/media/telegram-svgrepo-com.9ff8e82012b72f047bd7d9f0c5875fe6.svg",
+    "index.html": "/index.html",
+    "static/media/search-svgrepo-com.svg": "/static/media/search-svgrepo-com.3fa6884f65cdc80c70f9b31cf238912e.svg",
+    "main.77e8ea64.css.map": "/static/css/main.77e8ea64.css.map",
+    "main.40546983.js.map": "/static/js/main.40546983.js.map",
+    "453.d81cfe64.chunk.js.map": "/static/js/453.d81cfe64.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.77e8ea64.css",
+    "static/js/main.40546983.js"
+  ]
+}
