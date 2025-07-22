@@ -4,16 +4,16 @@
     font-family: inherit;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
 }
 
 .header-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 32px 12px 32px;
+    padding: 16px 32px 12px;
     width: 100%;
     box-sizing: border-box;
-    position: relative;
 }
 
 .header-nav {
@@ -27,19 +27,18 @@
 
 .header-logo {
     position: absolute;
+    top: 23%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 180px;
-    pointer-events: none; /* не перекриває кліки */
+    width: 150px;
+    /*pointer-events: none; !* Щоб не заважало клікам на елементи під ним *!*/
 }
 
 .header-logo img {
-    height: 120px; /* зменшено для desktop */
-    margin: 0 auto;
+    height: auto; /* Змінив з фіксованої висоти на auto */
+    width: 100%; /* Тепер змінюватиметься пропорційно */
+    max-height: 120px; /* Максимальна висота */
     display: block;
 }
 
@@ -52,6 +51,7 @@
     gap: 16px;
     z-index: 2;
 }
+
 .header-account:hover {
     color: #ff8c42;
 }
@@ -88,38 +88,33 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100vw;
-    min-width: 0;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    padding: 12px 16px;
+    width: 100%;
+    padding: 12px 32px;
     border-top: 1px solid #e0e0e0;
     box-sizing: border-box;
     gap: 16px;
-    position: relative;
-    max-width: none;
-    margin-top: 0;
 }
 
-/* Зробити search-bar максимально гнучким і центральним */
-.catalog-btn {
+/* ================= Search & Catalog ================= */
+.catalog-btn,
+.dropdown-btn {
+    margin-left: 25px;
     flex-shrink: 0;
-    margin-right: 12px;
-    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    background: linear-gradient(90deg, #fd5c36, #feb47b);
     color: #fff;
     border: none;
-    border-radius: 14px;
-    padding: 10px 18px;
-    font-size: 17px;
+    border-radius: 15px;
+    padding: 10px 22px;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s, box-shadow 0.2s;
     box-shadow: 0 2px 8px rgba(255, 126, 95, 0.07);
 }
 
-.catalog-btn:hover {
+.catalog-btn:hover,
+.dropdown-btn:hover,
+.dropdown-btn:focus-visible {
     background: linear-gradient(90deg, #feb47b, #ff7e5f);
     box-shadow: 0 4px 16px rgba(255, 126, 95, 0.15);
 }
@@ -130,21 +125,24 @@
     background: #ece9e9;
     border-radius: 10px;
     padding: 0 16px;
-    flex: 2 1 500px;  /* Дамо більше ваги і мінімуму */
-    min-width: 240px;
-    max-width: 1100px;
+    flex: 1 1 auto; /* Змінив з flex: 2 1 500px */
+    min-width: 300px; /* Зменшив мінімальну ширину */
+    max-width: 1300px; /* Зменшив максимальну ширину */
+    height: 44px; /* Фіксована висота */
     margin: 0 18px 0 0;
     box-sizing: border-box;
+    transition: max-width 0.3s ease; /* Плавна зміна ширини */
 }
 
 .search-bar input {
     border: none;
     background: transparent;
-    font-size: 18px;
-    padding: 12px 0 12px 0;
+    font-size: clamp(14px, 2vw, 16px); /* Зменшив максимальний розмір шрифту */
+    padding: 0; /* Змінив з 12px 0 */
     flex: 1 1 0%;
     outline: none;
     color: #222;
+    height: 100%; /* Заповнює всю висоту бару */
 }
 
 .search-icon {
@@ -155,6 +153,7 @@
     align-items: center;
 }
 
+/* ================= Header right ================= */
 .contacts {
     display: flex;
     align-items: center;
@@ -173,27 +172,21 @@
     white-space: nowrap;
 }
 
-.messenger {
-    display: inline-block;
-}
-
 .messenger img {
     width: 26px;
     height: 26px;
-    display: inline-block;
-    vertical-align: middle;
     transition: filter 0.2s;
 }
 
 .messenger img:hover {
-    filter: brightness(1.15) drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+    filter: brightness(1.15) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
 }
 
 .header-actions {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-right : 19px;
+    margin-right: 19px;
     flex-shrink: 0;
 }
 
@@ -210,42 +203,43 @@
     color: #ff6600;
 }
 
-/* Responsive для mobile/tablet */
-@media (max-width: 1100px) {
-    .header-bottom {
-        flex-wrap: wrap;
-        padding: 10px 4vw;
-        gap: 10px;
-    }
-    .search-bar {
-        max-width: 100vw;
-        margin: 10px 0;
-    }
+/* ================= Dropdown ================= */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
-@media (max-width: 700px) {
-    .header-bottom {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 8px 4vw;
-        gap: 8px;
-        left: 0;
-        right: 0;
-        margin-left: 0;
-        margin-right: 0;
-        width: 100vw;
-    }
-    .catalog-btn,
-    .contacts,
-    .header-actions {
-        justify-content: center;
-        margin: 0 auto;
-    }
-    .search-bar {
-        margin: 8px 0;
-        width: 100%;
-        min-width: 0;
-        max-width: 100vw;
-    }
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    padding: 6px 0;
+    z-index: 1000;
+    animation: fadeIn 150ms ease-out both;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 8px 16px;
+    font-size: 15px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+    background: #f5f5f5;
+}
+
+/* ============ Animation ============ */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ================= Footer ================= */
@@ -259,75 +253,386 @@
     background: #efd0b3;
     color: #222;
     text-align: center;
-    padding: 32px 0 24px 0;
+    padding: 32px 0 24px;
     font-size: 18px;
     font-family: inherit;
     letter-spacing: 0.02em;
 }
-/* ================ End Footer ================ */
 
-/* ====== Responsive ====== */
-@media (max-width: 900px) {
+/* ================= Page Blocks ================= */
+main {
+    min-height: 100vh;
+}
+
+.returning-page,
+.payment-container,
+.delivery-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.07);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.returning-page h1,
+.payment-container .title,
+.delivery-container .title {
+    font-size: 2.1rem;
+    color: #000000;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.subtitle {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.list {
+    list-style: disc;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.link {
+    color: #0438e1;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 1024px) {
     .header-top {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 12px 8px 8px 8px;
+        padding: 16px 24px 12px;
     }
-    .header-nav {
-        justify-content: center;
-        gap: 12px;
-        padding: 8px 4px;
-        font-size: 16px;
-    }
-    .header-account {
-        justify-content: center;
-        gap: 12px;
-        min-width: 0;
-    }
-    .header-logo img {
-        height: 48px;
-    }
-    .header-logo {
-        width: 110px;
-        position: static;
-        transform: none;
-        margin: 12px auto;
-        pointer-events: none;
-    }
+
     .header-bottom {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 12px 8px;
-        gap: 16px;
-        max-width: 100%;
-    }
-    .search-bar {
-        margin: 12px 0;
-        max-width: 100%;
-    }
-    .contacts {
-        justify-content: center;
-        min-width: 0;
+        padding: 12px 24px;
     }
 }
 
-/* ====== Додано корисне для mobile ====== */
-@media (max-width: 600px) {
-    .header-top,
+@media (max-width: 768px) {
+    .header-top {
+        flex-direction: column;
+        padding: 12px 16px 8px;
+    }
+
+    .header-logo {
+        position: relative;
+        transform: none;
+        margin: 0 auto 8px;
+        top: auto;
+        left: auto;
+    }
+
+    .header-logo img {
+        height: 80px;
+    }
+
+    .header-nav {
+        justify-content: center;
+        gap: 16px;
+        padding: 8px;
+    }
+
+    .header-account {
+        justify-content: center;
+        margin-top: 8px;
+    }
+
     .header-bottom {
-        padding: 8px 4px;
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .contacts {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-nav {
+        flex-wrap: wrap;
         gap: 8px;
     }
-    .header-logo img {
-        height: 32px;
-    }
-    .catalog-btn {
-        font-size: 16px;
-        padding: 8px 12px;
-        margin-right: 8px;
-    }
-    .footer-bar {
+
+    .header-nav a,
+    .header-account a {
         font-size: 15px;
-        padding: 16px 0 12px 0;
+    }
+
+    .header-logo img {
+        height: 60px;
+    }
+
+    .catalog-btn,
+    .dropdown-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .search-bar input {
+        font-size: 14px;
+    }
+
+    .phone {
+        font-size: 14px;
+    }
+
+    .action-icon {
+        font-size: 22px;
+    }
+}
+
+
+/*PARTS Prod*/
+
+
+.product-card {
+    width: 300px;
+    padding: 16px;
+    border: 2px solid #ff7a00;
+    border-radius: 20px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    font-family: 'Arial', sans-serif;
+    position: relative;
+}
+
+.product-image {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.product-image img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.star {
+    font-size: 18px;
+    color: #999;
+}
+
+.availability {
+    margin-left: auto;
+    background-color: #e6f2e6;
+    color: #4caf50;
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.product-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #444;
+    transition: color 0.3s ease;
+}
+
+.icon-button:hover {
+    color: #ff7a00;
+}
+
+/*PARTS Prod*/
+
+
+
+.category-page {
+    display: flex;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: nowrap; /* <-- опціонально, але можна додати */
+}
+/* Ліва колонка - фільтри */
+.filters {
+    width: 280px;
+    flex-shrink: 0;
+    padding: 24px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(182, 90, 90, 0.05);
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+    height: fit-content;
+    font-size: 15px;
+}
+
+.filters label {
+    display: block;
+    margin-bottom: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.filters input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.filters select,
+.filters input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 14px;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.filters select:focus,
+.filters input[type="number"]:focus {
+    outline: none;
+    border-color: #999;
+}
+
+/* Додати заголовок фільтрів */
+.filters::before {
+    content: "Фільтри";
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+/* Права колонка - контент */
+.content {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Заголовок */
+.category-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Сітка товарів */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+    width: 100%;
+}
+
+/* Картка товару */
+.product-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    background: white;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 340px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.product-image img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Мобільна адаптація */
+@media (max-width: 768px) {
+    .category-page {
+        flex-direction: column;
+    }
+
+    .filters {
+        width: 100%;
+        position: static;
+        margin-bottom: 20px;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 }

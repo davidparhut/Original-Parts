@@ -8,8 +8,13 @@ import Delivery from "./pages/delivery";
 import Opt from "./pages/opt";
 import Payment from "./pages/payment";
 import Registration from "./pages/registration";
-import Returning from "./pages/returnring";
+import Returning from "./pages/returning";
+import CategoryPage from "./pages/CatalogPage";
+
+
 import "/Users/apple/Desktop/original_parts/op/src/styles/styles.css";
+import HomePage from "./pages/homepage";
+
 
 function App() {
     return (
@@ -17,13 +22,15 @@ function App() {
             <Header />
             <main>
                 <Routes>
+                    <Route path="/category/:slug" element={<CategoryPage />} />
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/about" element={<AboutUS />} />
                     <Route path="/account" element={<Account />} />
                     <Route path="/delivery" element={<Delivery />} />
                     <Route path="/opt" element={<Opt />} />
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/registration" element={<Registration />} />
-                    <Route path="/returnring" element={<Returning />} />
+                    <Route path="/returning" element={<Returning />} />
                     {/* Головна сторінка або 404 можна додати тут */}
                 </Routes>
             </main>
